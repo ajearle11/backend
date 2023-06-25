@@ -39,7 +39,7 @@ const update = async (req, res) => {
   const userInput = req.body;
   try {
     const pokemonToUpdate = await Pokemon.showPoke(id);
-    await pokemonToUpdate.updatePoke(userInput);
+    const pokemon = await pokemonToUpdate.updatePoke(userInput);
     res.send(`successfully updated ${userInput.name}`);
   } catch (error) {
     console.log(error);
@@ -47,4 +47,16 @@ const update = async (req, res) => {
   }
 };
 
-module.exports = { index, show, create, update };
+const destroy = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const pokemonToDelete = await Pokemon.showPoke(id);
+    const pokemon = await pokemonToDelete.destroyPoke();
+    res.send(`${pokemon} ${pokemonToDelete.name}`);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error: "Server error" });
+  }
+};
+
+module.exports = { index, show, create, update, destroy };

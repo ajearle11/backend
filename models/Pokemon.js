@@ -48,8 +48,23 @@ class Pokemon {
     try {
       const update = body;
       const { name = this.name } = body;
-      const data = await db.query("UPDATE pokemon SET name = $1", [name]);
+      const data = await db.query(
+        "UPDATE pokemon SET name = $1 WHERE number = $2",
+        [name, this.number]
+      );
       return new Pokemon(data);
+    } catch (error) {
+      console.log(`Error ${error}`);
+      throw new Error("Failed to fetch pokemon");
+    }
+  }
+
+  async destroyPoke(body) {
+    try {
+      const data = await db.query("DELETE FROM pokemon WHERE number = $1", [
+        this.number,
+      ]);
+      return "successfully deleted";
     } catch (error) {
       console.log(`Error ${error}`);
       throw new Error("Failed to fetch pokemon");
