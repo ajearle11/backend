@@ -11,15 +11,13 @@ const index = async (req, res) => {
   }
 };
 
-const show = async (req, res) => {
+const show = async ( req, res) => {
   const id = req.params.id;
   try {
     const pokemon = await Pokemon.showPoke(id);
-
-    res.send(pokemon);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ error: "Server error" });
+    res.status(200).send(pokemon);
+  } catch (err) {
+    err.code === 404 ? res.status(404).send({error: "Pokemon does not exist"}) : res.status(500).send({ error: "Internal server error" });
   }
 };
 

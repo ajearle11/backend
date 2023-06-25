@@ -23,10 +23,12 @@ class Pokemon {
         id,
       ]);
       const pokesToSend = new Pokemon(data.rows[0]);
+      console.log(pokesToSend);
       return pokesToSend;
-    } catch (error) {
-      console.log(`Error ${error}`);
-      throw new Error("Failed to fetch pokemon");
+    } catch (err) {
+      new Error("message");
+      err.code = 404;
+      throw err;
     }
   }
 
