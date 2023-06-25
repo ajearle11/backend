@@ -1,12 +1,12 @@
-const Pokemon = require("../models/Pokemon");
+const Pokemon = require("../models/Pokemon.js");
 
-async function index (req, res) {
-    try {
-        const quotes = await Pokemon.showAll();
-        res.send(quotes);
-    } catch (err) {
-        res.status(500).send({ error: "Server error" });
-    }
-};
+async function index(req, res) {
+  try {
+    const pokemon = await Pokemon.showAll();
+    res.send(pokemon);
+  } catch (err) {
+    res.status(500).send({ error: "Server error" });
+  }
+}
 
-export {index}
+module.exports = { index };

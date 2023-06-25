@@ -1,17 +1,17 @@
-import express from "express";
+const express = require("express");
 const app = express();
-import cors from "cors";
-import logger from "morgan"
-import {pokemon} from "./routers/pokemon"
+const cors = require("cors");
+const logger = require("morgan");
+const pokemon = require("./routers/pokemon.js");
 
-app.use(logger('dev'))
+app.use(logger("dev"));
 app.use(cors());
 app.use(express.json());
 
-app.use("/pokemon", pokemon)
+app.use("/pokemon", pokemon);
 
 app.use("/", (req, res) => {
-    res.send("Yo")
+  res.send("Yo");
 });
 
-export { app };
+module.exports = app;
