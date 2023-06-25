@@ -1,9 +1,9 @@
 DROP TABLE IF EXISTS pokemon;
 
 CREATE TABLE pokemon (
-    name VARCHAR(30) NOT NULL,
+    name VARCHAR(30),
     number INT NOT NULL,
-    PRIMARY KEY (name)
+    PRIMARY KEY (number)
 );
 
 INSERT INTO pokemon (name, number)
